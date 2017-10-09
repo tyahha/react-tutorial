@@ -51,6 +51,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      isAsc: true,
     };
   }
 
@@ -83,6 +84,10 @@ class Game extends React.Component {
     });
   }
 
+  setMovesSortOrder(isAsc) {
+    this.setState({isAsc});
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -103,6 +108,7 @@ class Game extends React.Component {
         </li>
       );
     });
+    const ol = this.state.isAsc ? <ol>{moves}</ol> : <ol reversed>{moves.reverse()}</ol>;
     return (
       <div className="game">
         <div className="game-board">
@@ -113,7 +119,9 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <input type="radio" name="sortOrder" checked={this.state.isAsc} onChange={() => this.setMovesSortOrder(true)}/>asc
+          <input type="radio" name="sortOrder" checked={!this.state.isAsc} onChange={() => this.setMovesSortOrder(false)}/>desc
+          {ol}
         </div>
       </div>
     );
