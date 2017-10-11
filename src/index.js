@@ -112,7 +112,6 @@ class Game extends React.Component {
         </li>
       );
     });
-    const ol = this.state.isAsc ? <ol>{moves}</ol> : <ol reversed>{moves.reverse()}</ol>;
     return (
       <div className="game">
         <div className="game-board">
@@ -126,7 +125,7 @@ class Game extends React.Component {
           <div>{status}</div>
           <input type="radio" name="sortOrder" checked={this.state.isAsc} onChange={() => this.setMovesSortOrder(true)}/>asc
           <input type="radio" name="sortOrder" checked={!this.state.isAsc} onChange={() => this.setMovesSortOrder(false)}/>desc
-          {ol}
+          <ol reversed={!this.state.isAsc}>{this.state.isAsc ? moves : moves.reverse()}</ol>
         </div>
       </div>
     );
